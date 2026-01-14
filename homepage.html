@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <link rel="icon" type="image/x-icon" href="https://misemi-ya.github.io/www.misemi-ya.co.jp/images/favicon.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>株式会社ミセミーヤ - 公式ホームページ</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* 店魅偉屋大学セクションのスタイル */
+/* 店魅偉屋大学セクションのスタイル */
+#university {
+    padding: 100px 0; /* 上下の余白を増やす */
+    text-align: center;
+}
+
+#university h3 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    display: flex; /* アイコンとテキストを横並びにするため */
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+#university h3::after {
+    background-color: var(--accent-color); /* 下線の色を変更 */
+    width: 90px; /* 下線の幅を広げる */
+}
+
+.university-icon {
+    font-size: 0.8em; /* アイコンのサイズ調整 */
+    margin-left: 15px; /* アイコンとテキストの間隔 */
+    color: var(--accent-color); /* アイコンの色 */
+    transition: transform 0.3s ease; /* ホバーアニメーション */
+}
+
+#university h3:hover .university-icon {
+    transform: rotate(10deg) scale(1.1); /* ホバーでアイコンを少し回転・拡大 */
+}
+
+.university-intro {
+    font-size: 1.15em;
+    max-width: 800px;
+    margin: 0 auto 50px auto; /* 下のボタンとの余白を増やす */
+    line-height: 1.8;
+    color: #555;
+    font-weight: 400;
+}
+
+.university-button-wrapper {
+    margin-top: 40px; /* ボタンの上の余白を調整 */
+}
+
+.btn-university {
+    background-color: var(--accent-color); /* ここを変更 */
+    padding: 20px 45px; /* ボタンのサイズを少し大きく */
+    font-size: 1.3em;
+    border-radius: 10px; /* 角を丸く */
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2); /* 影を強調 */
+}
+
+.btn-university:hover {
+    background-color: #d35400; /* ホバー時の色 (少し濃いオレンジ) */
+    transform: translateY(-5px) scale(1.02); /* ホバー時のアニメーションを強調 */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    color: var(--white-color); /* ホバー時もテキスト色を白に保つ */
+}
+
+/* レスポンシブデザインの調整 */
+@media (max-width: 768px) {
+    #university {
+        padding: 80px 0;
+    }
+    #university h3 {
+        font-size: 2.2em;
+    }
+    .university-intro {
+        font-size: 1.05em;
+        margin-bottom: 30px;
+    }
+    .btn-university {
+        padding: 16px 35px;
+        font-size: 1.15em;
+    }
+}
+
+@media (max-width: 480px) {
+    #university {
+        padding: 60px 0;
+    }
+    #university h3 {
+        font-size: 1.8em;
+    }
+    .university-icon {
+        font-size: 0.7em;
+        margin-left: 10px;
+    }
+    .university-intro {
+        font-size: 1em;
+        margin-bottom: 25px;
+    }
+    .btn-university {
+        padding: 14px 30px;
+        font-size: 1.05em;
+    }
+}
+        /* 基本スタイル */
+:root {
+    --primary-color: #2c3e50; /* 濃い青系グレー */
+    --secondary-color: #3498db; /* 明るい青 */
+    --accent-color: #e67e22; /* オレンジ */
+    --text-color: #333;
+    --light-gray: #f4f4f4;
+    --white-color: #ffffff;
+    --base-font: 'Noto Sans JP', sans-serif;
+    --heading-font: 'Poppins', sans-serif;
+}
+
+body {
+    font-family: var(--base-font);
+    line-height: 1.7;
+    margin: 0;
+    padding: 0;
+    background-color: var(--white-color);
+    color: var(--text-color);
+    font-weight: 300;
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+h1, h2, h3 {
+    font-family: var(--heading-font);
+    color: var(--primary-color);
+    margin-top: 0;
+    font-weight: 600;
+}
+
+p {
+    margin-bottom: 1.2em;
+    font-size: 1.05em;
+}
+
+a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+/* ヘッダー */
+header {
+    /* 変更点: 背景色をRGBAで指定して半透明に */
+    background-color: rgba(255, 255, 255, 0.8); /* 80%の不透明度を持つ白 */
+    
+    /* 追加点: 背景にすりガラス効果を追加 */
+    -webkit-backdrop-filter: blur(10px); /* Safari向け */
+    backdrop-filter: blur(10px); /* 標準 */
+
+    padding: 25px 0;
+    border-bottom: 1px solid #e0e0e0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-container .logo {
+    font-size: 2.2em;
+    margin: 0;
+    color: var(--primary-color);
+    font-weight: 700;
+}
+.logo-container .tagline {
+    font-size: 0.9em;
+    margin: -5px 0 0 2px;
+    color: #777;
+    font-family: var(--base-font);
+}
+
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+header nav ul li {
+    margin-left: 30px;
+}
+
+header nav ul li a {
+    font-size: 1.1em;
+    color: var(--primary-color);
+    font-weight: 400;
+    padding-bottom: 5px;
+    border-bottom: 2px solid transparent; /* ホバー時の下線用 */
+}
+
+header nav ul li a:hover {
+    color: var(--secondary-color);
+    border-bottom-color: var(--secondary-color);
+    text-decoration: none;
+}
+
+/* ヒーローセクション */
+#hero {
+    background: linear-gradient(to right, var(--secondary-color), #5dade2); /* グラデーション背景 */
+    color: var(--white-color);
+    padding: 100px 0;
+    text-align: center;
+}
+
+#hero h2 {
+    font-size: 3em;
+    margin-bottom: 25px;
+    color: var(--white-color);
+    font-weight: 700;
+}
+
+#hero p {
+    font-size: 1.3em;
+    max-width: 750px;
+    margin: 0 auto;
+    font-weight: 300;
+    line-height: 1.8;
+}
+
+/* コンテンツセクション共通スタイル */
+.content-section {
+    padding: 80px 0;
+    border-bottom: 1px solid var(--light-gray);
+}
+
+.content-section:nth-child(odd) { /* セクションごとに背景色を交互に変える場合 */
+    /* background-color: var(--light-gray); */
+}
+
+
+.content-section h3 {
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    text-align: center;
+    color: var(--primary-color);
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.content-section h3::after { /* 見出しの下線アニメーション */
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 70px;
+    height: 3px;
+    background-color: var(--secondary-color);
+}
+
+
+/* 会社紹介セクション */
+#about .about-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+#about .about-content p {
+    font-size: 1.1em;
+    margin-bottom: 1.5em;
+}
+
+/* 商品一覧セクション */
+#products {
+    text-align: center;
+}
+
+#products p {
+    font-size: 1.15em;
+    max-width: 700px;
+    margin: 0 auto 40px auto;
+}
+
+.button-wrapper {
+    margin-top: 30px;
+}
+
+.btn-products {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: var(--white-color);
+    padding: 18px 40px;
+    font-size: 1.2em;
+    font-weight: 700;
+    font-family: var(--heading-font);
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.btn-products:hover {
+    background-color: #d35400; /* 少し濃いオレンジ */
+    color: var(--white-color);
+    text-decoration: none;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+/* フッター */
+footer {
+    background-color: var(--primary-color);
+    color: var(--light-gray);
+    text-align: center;
+    padding: 40px 0;
+    margin-top: 0; /* 最後のセクションのborder-bottomがあるので不要なら調整 */
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.95em;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+    header .container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .logo-container {
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    .logo-container .logo {
+        font-size: 1.8em;
+    }
+
+    header nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    header nav ul li {
+        margin: 10px 0;
+    }
+
+    #hero h2 {
+        font-size: 2.4em;
+    }
+
+    #hero p {
+        font-size: 1.1em;
+    }
+
+    .content-section h3 {
+        font-size: 2em;
+    }
+    .content-section h3::after {
+        width: 50px;
+    }
+
+    .btn-products {
+        padding: 15px 30px;
+        font-size: 1.1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: 95%;
+        padding: 0 15px;
+    }
+    
+    .logo-container .logo {
+        font-size: 1.6em;
+    }
+
+    #hero {
+        padding: 60px 0;
+    }
+    #hero h2 {
+        font-size: 2em;
+    }
+
+    #hero p {
+        font-size: 1em;
+    }
+
+    .content-section {
+        padding: 50px 0;
+    }
+    .content-section h3 {
+        font-size: 1.8em;
+    }
+
+    .btn-products {
+        padding: 12px 25px;
+        font-size: 1em;
+    }
+}
+    </style>
+    <link rel="icon" type="image/x-icon" href="/img/icon.png">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo-container">
+                <h1 class="logo">株式会社ミセミーヤ</h1>
+                <p class="tagline">Misemiya Inc.</p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#about">会社紹介</a></li>
+                    <li><a href="#products">商品一覧</a></li>
+                    <li><a href="#university">店魅偉屋大学</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="container">
+                <h2>日常に、便利を。</h2>
+                <p>株式会社ミセミーヤは、革新的なアイデアと確かな品質で、あなたの毎日をより豊かにするお手伝いをします。</p>
+            </div>
+        </section>
+
+        <section id="about" class="content-section">
+            <div class="container">
+                <h3>私たちのこと</h3>
+                <div class="about-content">
+                    <p>株式会社ミセミーヤは、2020年に設立され、お客様の生活を豊かにするユニークな製品を提供することを使命としています。私たちは常に品質とデザインにこだわり、使う人に喜びをもたらす商品開発を目指しています。</p>
+                    <p>主な事業として、ECサイト、ミセミーヤを展開しており、特に全世界の全商品の販売において高い評価をいただいております。今後も、持続可能な社会の実現に貢献しつつ、革新的な価値を提供し続けてまいります。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="products" class="content-section">
+            <div class="container">
+                <h3>商品のご案内</h3>
+                <p>ミセミーヤが自信を持っておすすめする、こだわりの商品ラインナップをご覧ください。最新の商品情報やお得なキャンペーンもこちらからご確認いただけます。</p>
+                <div class="button-wrapper">
+                    <a href="https://misemi-ya.github.io/www.misemi-ya.co.jp" class="btn-products" target="_blank" rel="noopener noreferrer">商品一覧サイトへ進む</a>
+                </div>
+            </div>
+        
+        <section id="university" class="content-section">
+            <div class="container">
+                <h3>店魅偉屋大学 <span class="university-icon">🎓</span></h3>
+                <p class="university-intro">
+                    「店魅偉屋大学」は、あなたのビジネススキルと創造性を最大限に引き出すための実践的な学びの場です。
+                    最新のマーケティング戦略から、お客様を魅了する商品開発、そして効果的なECサイト運営まで、
+                    明日から使える知識と技術を提供します。私たちと共に、あなたの「お店」を「魅力的」な「偉業」へと導きましょう。
+                </p>
+                <div class="button-wrapper university-button-wrapper">
+                    <a href="https://misemi-ya.github.io/www.misemi-ya.co.jp/university/index.html" class="btn-products btn-university" target="_blank" rel="noopener noreferrer">
+                        店魅偉屋大学ホームページへ
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 株式会社ミセミーヤ. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
