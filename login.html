@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <link rel="icon" type="image/x-icon" href="https://misemi-ya.github.io/www.misemi-ya.co.jp/images/favicon.ico">
+  <link rel="icon" type="image/x-icon" href="https://www.misemi-ya.net/images/favicon.ico">
   <meta charset="UTF-8">
   <title>従業員ログイン</title>
   <script src="https://cdn.tailwindcss.com"></script>
@@ -123,7 +123,7 @@
 
   <script>
     // (MSAL設定など、前半のJSは変更なし)
-    const msalConfig = { auth: { clientId: "c997f97a-5a7f-4ddf-89d4-79f84a1d14fd", authority: "https://login.microsoftonline.com/f26d3362-79fe-4262-817a-531c7cdbf597", redirectUri: "https://misemi-ya.github.io/www.misemi-ya.co.jp/syain.html" }, cache: { cacheLocation: "sessionStorage", storeAuthStateInCookie: false }};
+    const msalConfig = { auth: { clientId: "c997f97a-5a7f-4ddf-89d4-79f84a1d14fd", authority: "https://login.microsoftonline.com/f26d3362-79fe-4262-817a-531c7cdbf597", redirectUri: "https://www.misemi-ya.net/syain.html" }, cache: { cacheLocation: "sessionStorage", storeAuthStateInCookie: false }};
     const msalInstance = new msal.PublicClientApplication(msalConfig);
     const loginRequest = { scopes: ["openid", "profile", "User.Read"] };
     function manualLogin() { const id = document.getElementById("employee-id").value; const pw = document.getElementById("employee-password").value; if ((id === "012365498827" && pw === "43386592") || (id === "017446484632" && pw === "11969662") || (id === "DR0626GS241" && pw === "DR0626GS241") || (id === "KYO0626TH241" && pw === "KYO0626TH241")) { console.log("従来のログイン成功！ ページ遷移を開始..."); window.location.href = "syain.html"; } }
