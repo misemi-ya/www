@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found | 株式会社ミセミーヤ</title>
+    <style>
+        /* ============================
+           Base Settings (iOS Style)
+           ============================ */
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.25);
+            --glass-border: rgba(255, 255, 255, 0.6);
+            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+            --text-main: #1d1d1f; /* Apple Black */
+            --text-sub: #86868b;
+            --accent-color: #007AFF; /* iOS Blue */
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f2f2f7;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* 背景アニメーションのはみ出し防止 */
+        }
+
+        /* ============================
+           Background Aurora Animation
+           ============================ */
+        .ambient-light {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 120vw;
+            height: 120vh;
+            transform: translate(-50%, -50%);
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(255, 154, 158, 0.6) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(161, 140, 209, 0.6) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(253, 226, 147, 0.5) 0%, transparent 50%);
+            filter: blur(60px);
+            z-index: -1;
+            animation: aurora 15s ease-in-out infinite alternate;
+        }
+
+        @keyframes aurora {
+            0% { transform: translate(-50%, -50%) scale(1); }
+            100% { transform: translate(-50%, -50%) scale(1.1) rotate(5deg); }
+        }
+
+        /* ============================
+           Glass Card Container
+           ============================ */
+        .glass-container {
+            width: 90%;
+            max-width: 420px;
+            padding: 60px 40px;
+            text-align: center;
+            
+            /* Glassmorphism Effect */
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px); /* Safari support */
+            border: 1px solid var(--glass-border);
+            border-radius: 40px; /* iOS Super Ellipse風 */
+            box-shadow: var(--glass-shadow);
+            
+            /* Animation */
+            animation: floatCard 6s ease-in-out infinite;
+        }
+
+        @keyframes floatCard {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* ============================
+           Content Elements
+           ============================ */
+        
+        /* ロゴ画像 */
+        .logo-img {
+            max-width: 180px;
+            height: auto;
+            margin-bottom: 30px;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-img:hover {
+            transform: scale(1.05);
+        }
+
+        /* 404 Typography */
+        h1 {
+            font-size: 6rem;
+            font-weight: 800;
+            margin: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -2px;
+            line-height: 1;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 1rem;
+            color: var(--text-sub);
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+
+        /* ============================
+           Glass Button
+           ============================ */
+        .btn-ios {
+            display: inline-block;
+            padding: 14px 32px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            color: #fff;
+            
+            /* Button Style */
+            background: rgba(0, 122, 255, 0.85);
+            backdrop-filter: blur(4px);
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0, 122, 255, 0.3);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .btn-ios:hover {
+            background: rgba(0, 122, 255, 1);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 122, 255, 0.45);
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 480px) {
+            .glass-container { padding: 40px 20px; }
+            h1 { font-size: 4.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 背景のオーロラエフェクト -->
+    <div class="ambient-light"></div>
+
+    <!-- メインのガラスカード -->
+    <main class="glass-container">
+        <!-- ロゴ画像 -->
+        <img src="images/misemi-ya.png" alt="株式会社ミセミーヤ Logo" class="logo-img">
+
+        <h1>404</h1>
+        <h2>Page Not Found</h2>
+        
+        <p>
+            申し訳ありません。<br>
+            ご指定のページは<br>
+            お見せ（ミセ）できないようです。
+        </p>
+
+        <a href="https://www.misemi-ya.net" class="btn-ios">Top Page</a>
+    </main>
+
+</body>
+</html>
