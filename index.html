@@ -7,77 +7,193 @@
     <title>株式会社ミセミーヤ - 公式ホームページ</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* --- 基本スタイル（既存） --- */
+        /* --- 基本変数 --- */
         :root {
             --primary-color: #2c3e50;
             --secondary-color: #3498db;
             --accent-color: #e67e22;
             --text-color: #333;
-            --light-gray: #f4f4f4;
+            --light-gray: #f8f9fa;
             --white-color: #ffffff;
+            --shadow-soft: 0 4px 20px rgba(0,0,0,0.08);
+            --radius-md: 12px;
             --base-font: 'Noto Sans JP', sans-serif;
             --heading-font: 'Poppins', sans-serif;
         }
 
-        body { font-family: var(--base-font); line-height: 1.7; margin: 0; padding: 0; background-color: var(--white-color); color: var(--text-color); font-weight: 300; }
-        .container { width: 90%; max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        body { font-family: var(--base-font); line-height: 1.7; margin: 0; padding: 0; background-color: var(--white-color); color: var(--text-color); font-weight: 300; -webkit-font-smoothing: antialiased; }
+        .container { width: 90%; max-width: 1000px; margin: 0 auto; padding: 0 20px; }
         h1, h2, h3 { font-family: var(--heading-font); color: var(--primary-color); margin-top: 0; font-weight: 600; }
         p { margin-bottom: 1.2em; font-size: 1.05em; }
         a { color: var(--secondary-color); text-decoration: none; transition: color 0.3s ease; }
 
-        /* --- ヘッダー（既存） --- */
+        /* --- ヘッダー（レスポンシブ対応版） --- */
         header {
-            background-color: rgba(255, 255, 255, 0.8);
-            -webkit-backdrop-filter: blur(10px);
-            backdrop-filter: blur(10px);
-            padding: 25px 0;
-            border-bottom: 1px solid #e0e0e0;
+            background-color: rgba(255, 255, 255, 0.9);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
         header .container { display: flex; justify-content: space-between; align-items: center; }
-        .logo-container .logo { font-size: 2.2em; margin: 0; color: var(--primary-color); font-weight: 700; }
-        .logo-container .tagline { font-size: 0.9em; margin: -5px 0 0 2px; color: #777; }
-        header nav ul { list-style: none; padding: 0; margin: 0; display: flex; }
-        header nav ul li { margin-left: 30px; }
-        header nav ul li a { font-size: 1.1em; color: var(--primary-color); font-weight: 400; }
+        
+        .logo-container .logo { font-size: 1.8em; margin: 0; color: var(--primary-color); font-weight: 700; line-height: 1.2; }
+        .logo-container .tagline { font-size: 0.75em; margin: 0; color: #888; letter-spacing: 1px; }
 
-        /* --- セクション共通（既存） --- */
+        /* PC用ナビゲーション */
+        .nav-menu ul { list-style: none; padding: 0; margin: 0; display: flex; gap: 30px; }
+        .nav-menu ul li a { font-size: 1em; color: var(--primary-color); font-weight: 500; padding: 5px 0; position: relative; }
+        .nav-menu ul li a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0; background-color: var(--accent-color); transition: width 0.3s; }
+        .nav-menu ul li a:hover::after { width: 100%; }
+
+        /* ハンバーガーメニュー（スマホ用） */
+        .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; z-index: 1001; }
+        .hamburger span { width: 25px; height: 2px; background-color: var(--primary-color); transition: 0.3s; }
+
+        /* --- セクション共通 --- */
         .content-section { padding: 80px 0; border-bottom: 1px solid var(--light-gray); }
-        .content-section h3 { font-size: 2.5em; margin-bottom: 40px; text-align: center; position: relative; padding-bottom: 15px; }
-        .content-section h3::after { content: ''; position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); width: 70px; height: 3px; background-color: var(--secondary-color); }
+        .content-section h3 { font-size: 2.2em; margin-bottom: 40px; text-align: center; position: relative; padding-bottom: 15px; }
+        .content-section h3::after { content: ''; position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); width: 60px; height: 3px; background-color: var(--accent-color); border-radius: 2px; }
 
-        /* --- ヒーロー（既存） --- */
-        #hero { background: linear-gradient(to right, var(--secondary-color), #5dade2); color: var(--white-color); padding: 100px 0; text-align: center; }
-        #hero h2 { font-size: 3em; color: var(--white-color); margin-bottom: 25px; }
-        #hero p { font-size: 1.3em; max-width: 750px; margin: 0 auto; }
+        /* --- ヒーロー --- */
+        #hero { background: linear-gradient(135deg, var(--secondary-color), #6dd5fa); color: var(--white-color); padding: 120px 0 100px; text-align: center; clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%); margin-bottom: -40px; }
+        #hero h2 { font-size: 2.8em; color: var(--white-color); margin-bottom: 20px; text-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        #hero p { font-size: 1.2em; max-width: 700px; margin: 0 auto; opacity: 0.95; }
 
-        /* --- ボタン類（既存） --- */
-        .btn-products { display: inline-block; background-color: var(--accent-color); color: var(--white-color); padding: 18px 40px; font-size: 1.2em; font-weight: 700; border-radius: 8px; text-decoration: none; border:none; cursor:pointer; transition: all 0.3s ease; }
-        .btn-products:hover { background-color: #d35400; transform: translateY(-3px); box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        /* --- ボタン類 --- */
+        .btn-products { 
+            display: inline-block; 
+            background: linear-gradient(45deg, var(--accent-color), #f39c12); 
+            color: var(--white-color); 
+            padding: 16px 36px; 
+            font-size: 1.1em; 
+            font-weight: 600; 
+            border-radius: 50px; 
+            text-decoration: none; 
+            border:none; 
+            cursor:pointer; 
+            transition: all 0.3s ease; 
+            box-shadow: 0 4px 15px rgba(230, 126, 34, 0.4); 
+        }
+        .btn-products:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(230, 126, 34, 0.6); }
 
-        /* --- 大学セクション（既存デザイン） --- */
-        #university { text-align: center; }
-        .university-icon { color: var(--accent-color); margin-left: 10px; font-size: 0.8em; }
-        .university-intro { font-size: 1.15em; max-width: 800px; margin: 0 auto 50px auto; }
+        /* --- 大学セクション --- */
+        #university { text-align: center; background-color: #fff; }
+        .university-icon { color: var(--accent-color); margin-left: 10px; font-size: 0.9em; }
+        .university-intro { font-size: 1.1em; max-width: 800px; margin: 0 auto 40px auto; color: #555; }
 
-        /* --- 在庫管理用（追加分） --- */
-        .table-wrapper { overflow-x: auto; margin-top: 20px; }
-        #inventory-body tr:nth-child(even) { background-color: #fcfcfc; }
-        #inventory-body tr { border-bottom: 1px solid #eee; }
-        .qty-btn { background: #eee; border: 1px solid #ccc; padding: 5px 12px; cursor: pointer; border-radius: 4px; margin: 0 5px; font-weight: bold; }
-        .delete-btn { background: #e74c3c; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; }
-        input[type="number"], input[type="text"] { padding: 10px; border: 1px solid #ccc; border-radius: 4px; }
+        /* --- 在庫管理デザイン（おしゃれ＆スマホ対応） --- */
+        #inventory-placeholder button { width: 100%; max-width: 400px; }
+        
+        #admin-panel {
+            background: white;
+            padding: 25px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 30px;
+            border: 1px solid #eee;
+        }
 
-        footer { background-color: var(--primary-color); color: var(--light-gray); text-align: center; padding: 40px 0; }
+        .input-group { display: flex; gap: 10px; flex-wrap: wrap; }
+        input[type="text"], input[type="number"] { 
+            padding: 12px 15px; 
+            border: 1px solid #ddd; 
+            border-radius: 8px; 
+            font-size: 16px; 
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        input:focus { border-color: var(--secondary-color); }
 
+        /* テーブルスタイル（PC向け） */
+        .table-wrapper { width: 100%; border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-soft); background: white; }
+        table { width: 100%; border-collapse: collapse; }
+        th { background-color: var(--primary-color); color: white; padding: 18px; text-align: left; font-weight: 500; font-size: 0.95em; }
+        td { padding: 15px 18px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
+        tr:last-child td { border-bottom: none; }
+        
+        .qty-controls { display: flex; align-items: center; justify-content: center; gap: 15px; }
+        .qty-val { font-weight: 700; font-size: 1.3em; width: 40px; text-align: center; display: inline-block; color: var(--primary-color); }
+        
+        .btn-circle {
+            width: 32px; height: 32px; border-radius: 50%; border: none;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px; cursor: pointer; transition: 0.2s;
+            background-color: #f0f2f5; color: #555;
+        }
+        .btn-circle:hover { background-color: #e0e0e0; }
+        .btn-delete {
+            background-color: #fff0f0; color: #e74c3c; border: none;
+            padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.9em; transition: 0.2s;
+        }
+        .btn-delete:hover { background-color: #ffe0e0; }
+
+        footer { background-color: var(--primary-color); color: rgba(255,255,255,0.7); text-align: center; padding: 30px 0; font-size: 0.9em; }
+
+        /* --- スマホ対応（レスポンシブ） --- */
         @media (max-width: 768px) {
-            header .container { flex-direction: column; }
-            header nav ul { margin-top: 15px; flex-direction: column; align-items: center; }
-            header nav ul li { margin: 5px 0; }
-            .content-section h3 { font-size: 2em; }
+            /* ヘッダー改善 */
+            header { padding: 10px 0; }
+            .logo-container .logo { font-size: 1.4em; }
+            .hamburger { display: flex; }
+
+            /* ナビゲーションをドロワーメニュー化 */
+            .nav-menu {
+                position: fixed; top: 60px; right: -100%;
+                width: 100%; height: calc(100vh - 60px);
+                background-color: rgba(255, 255, 255, 0.98);
+                flex-direction: column; align-items: center; justify-content: flex-start;
+                padding-top: 40px; transition: 0.3s ease-in-out;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            }
+            .nav-menu.active { right: 0; }
+            .nav-menu ul { flex-direction: column; gap: 25px; align-items: center; }
+            .nav-menu ul li a { font-size: 1.2em; }
+
+            /* セクション余白調整 */
+            .content-section { padding: 60px 0; }
+            #hero { padding: 80px 0 80px; clip-path: none; }
+            #hero h2 { font-size: 2em; }
+            
+            /* 在庫管理：カードビュー化 */
+            .table-wrapper, table, thead, tbody, th, td, tr { display: block; }
+            thead { display: none; } /* ヘッダーを隠す */
+            
+            .table-wrapper { box-shadow: none; background: transparent; }
+            tr {
+                background: white;
+                margin-bottom: 15px;
+                border-radius: 12px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+                padding: 15px;
+                border: 1px solid #f0f0f0;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                position: relative;
+            }
+            td { padding: 5px 0; border: none; text-align: center; }
+            
+            /* 商品名 */
+            td:first-child { 
+                font-weight: 700; font-size: 1.2em; color: var(--primary-color); 
+                text-align: left; padding-bottom: 10px; border-bottom: 1px dashed #eee;
+            }
+            
+            /* 数量操作部分 */
+            .qty-controls { justify-content: space-between; background: #f9f9f9; padding: 10px 20px; border-radius: 8px; }
+            .btn-circle { width: 40px; height: 40px; font-size: 22px; background: white; border: 1px solid #eee; }
+            
+            /* 削除ボタン */
+            td:last-child { text-align: right; margin-top: 5px; }
+            .btn-delete { width: 100%; padding: 12px; font-weight: bold; }
+
+            /* 入力フォームのスマホ化 */
+            .input-group input { width: 100%; flex: none; }
+            #add-item-btn { width: 100%; padding: 12px; margin-top: 5px; }
         }
     </style>
 </head>
@@ -86,13 +202,21 @@
         <div class="container">
             <div class="logo-container">
                 <h1 class="logo">株式会社ミセミーヤ</h1>
-                <p class="tagline">Misemi-ya Inc.</p>
+                <p class="tagline">Misemiya Inc.</p>
             </div>
-            <nav>
+            
+            <!-- ハンバーガーアイコン -->
+            <div class="hamburger" id="hamburger-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <nav class="nav-menu" id="nav-menu">
                 <ul>
-                    <li><a href="#about">会社紹介</a></li>
-                    <li><a href="#products">商品一覧</a></li>
-                    <li><a href="#university">店魅偉屋大学</a></li>
+                    <li><a href="#about" onclick="closeMenu()">会社紹介</a></li>
+                    <li><a href="#products" onclick="closeMenu()">商品一覧</a></li>
+                    <li><a href="#university" onclick="closeMenu()">店魅偉屋大学</a></li>
                 </ul>
             </nav>
         </div>
@@ -103,7 +227,7 @@
         <section id="hero">
             <div class="container">
                 <h2>日常に、便利を。</h2>
-                <p>株式会社ミセミーヤは、革新的なアイデアと確かな品質で、あなたの毎日をより豊かにするお手伝いをします。</p>
+                <p>株式会社ミセミーヤは、革新的なアイデアと確かな品質で、<br>あなたの毎日をより豊かにするお手伝いをします。</p>
             </div>
         </section>
 
@@ -111,19 +235,19 @@
         <section id="about" class="content-section">
             <div class="container">
                 <h3>私たちのこと</h3>
-                <div class="about-content" style="max-width: 800px; margin: 0 auto;">
+                <div class="about-content" style="max-width: 800px; margin: 0 auto; color: #555;">
                     <p>株式会社ミセミーヤは、2020年に設立され、お客様の生活を豊かにするユニークな製品を提供することを使命としています。私たちは常に品質とデザインにこだわり、使う人に喜びをもたらす商品開発を目指しています。</p>
-                    <p>主な事業として、ECサイト、ミセミーヤを展開しており、特に全世界の全商品の販売において高い評価をいただいております。今後も、持続可能な社会の実現に貢献しつつ、革新的な価値を提供し続けてまいります。</p>
+                    <p>主な事業として、ECサイト、ミセミーヤを展開しており、特に全世界の全商品の販売において高い評価をいただいております。</p>
                 </div>
             </div>
         </section>
 
         <!-- 商品のご案内セクション -->
-        <section id="products" class="content-section">
+        <section id="products" class="content-section" style="background-color: #fafafa;">
             <div class="container" style="text-align: center;">
                 <h3>商品のご案内</h3>
-                <p>ミセミーヤが自信を持っておすすめする、こだわりの商品ラインナップをご覧ください。最新の商品情報やお得なキャンペーンもこちらからご確認いただけます。</p>
-                <div class="button-wrapper">
+                <p>ミセミーヤが自信を持っておすすめする、こだわりの商品ラインナップをご覧ください。</p>
+                <div class="button-wrapper" style="margin-top: 30px;">
                     <a href="https://shop.misemi-ya.net" class="btn-products" target="_blank" rel="noopener noreferrer">商品一覧サイトへ進む</a>
                 </div>
             </div>
@@ -134,55 +258,55 @@
             <div class="container">
                 <h3>店魅偉屋大学 <span class="university-icon">🎓</span></h3>
                 <p class="university-intro">
-                    「店魅偉屋大学」は、あなたのビジネススキルと創造性を最大限に引き出すための実践的な学びの場です。
-                    最新のマーケティング戦略から、お客様を魅了する商品開発、そして効果的なECサイト運営まで、
-                    明日から使える知識と技術を提供します。私たちと共に、あなたの「お店」を「魅力的」な「偉業」へと導きましょう。
+                    「店魅偉屋大学」は、ビジネススキルと創造性を最大限に引き出すための実践的な学びの場です。
+                    明日から使える知識と技術を提供します。
                 </p>
                 <div class="button-wrapper">
-                    <a href="https://u.misemi-ya.net" class="btn-products" target="_blank" rel="noopener noreferrer">店魅偉屋大学ホームページへ</a>
+                    <a href="https://u.misemi-ya.net" class="btn-products" target="_blank" rel="noopener noreferrer" style="background: var(--primary-color);">大学ホームページへ</a>
                 </div>
             </div>
         </section>
 
-        <!-- 在庫管理：アンロック前（初期状態） -->
-        <section id="inventory-placeholder" class="content-section" style="text-align: center; background-color: #f9f9f9;">
+        <!-- 在庫管理：アンロック前 -->
+        <section id="inventory-placeholder" class="content-section" style="text-align: center; background-color: #f0f4f8;">
             <div class="container">
-                <button id="btn-unlock" class="btn-products" style="background-color: var(--primary-color);">
-                    カップヌードル在庫管理を表示 (要パスワード)
+                <button id="btn-unlock" class="btn-products" style="background-color: var(--primary-color); box-shadow: 0 4px 15px rgba(44, 62, 80, 0.3);">
+                    在庫管理システムを開く 🔒
                 </button>
+                <p style="font-size: 0.85em; margin-top: 10px; color: #777;">※パスワードが必要です</p>
             </div>
         </section>
 
-        <!-- 在庫管理：本体（パスワード後に出現） -->
-        <section id="inventory-main" class="content-section" style="display: none;">
+        <!-- 在庫管理：本体 -->
+        <section id="inventory-main" class="content-section" style="display: none; background-color: #f9f9f9;">
             <div class="container">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap; gap: 20px;">
-                    <h3 style="margin-bottom: 0; text-align: left;">カップヌードル在庫管理</h3>
-                    <button id="btn-lock" style="background:none; border:none; color:#777; cursor:pointer; text-decoration:underline;">管理画面を閉じる</button>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 10px;">
+                    <h3 style="margin-bottom: 0; font-size: 1.8em;">📦 在庫管理</h3>
+                    <button id="btn-lock" style="background:none; border:none; color:#e74c3c; cursor:pointer; font-weight:bold; font-size: 0.9em;">✕ 閉じる</button>
                 </div>
 
                 <!-- 新規追加フォーム -->
-                <div id="admin-panel" style="background: #f4f4f4; padding: 20px; border-radius: 8px; margin-bottom: 30px; border: 1px solid #ddd;">
-                    <h4 style="margin-top:0;">新しく商品を追加</h4>
-                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <input type="text" id="new-name" placeholder="商品名" style="flex: 2; min-width: 200px;">
-                        <input type="number" id="new-count" placeholder="個数" style="flex: 1; min-width: 80px;">
-                        <button id="add-item-btn" class="btn-products" style="padding: 10px 20px; font-size: 0.9em;">追加</button>
+                <div id="admin-panel">
+                    <h4 style="margin-top:0; color:var(--primary-color); margin-bottom:15px;">新規商品登録</h4>
+                    <div class="input-group">
+                        <input type="text" id="new-name" placeholder="商品名を入力" style="flex: 2;">
+                        <input type="number" id="new-count" placeholder="個数" style="flex: 1;">
+                        <button id="add-item-btn" class="btn-products" style="padding: 12px 25px; font-size: 1em; border-radius: 8px;">追加</button>
                     </div>
-                    <button onclick="importInitialData()" style="margin-top:15px; font-size:0.6em; opacity:0.4; border:none; background:none; cursor:pointer;">[初期データ投入ボタン]</button>
+                    <button onclick="importInitialData()" style="margin-top:10px; font-size:0.75em; color:#999; background:none; border:none; text-decoration:underline; cursor:pointer;">初期データをインポート</button>
                 </div>
 
                 <div class="table-wrapper">
-                    <table style="width: 100%; border-collapse: collapse; background: white; border: 1px solid #eee;">
+                    <table>
                         <thead>
-                            <tr style="background-color: var(--primary-color); color: white;">
-                                <th style="padding: 15px; text-align: left;">商品名</th>
-                                <th style="padding: 15px; text-align: center; width: 150px;">個数</th>
-                                <th style="padding: 15px; text-align: center; width: 120px;">操作</th>
+                            <tr>
+                                <th style="width: 50%;">商品名</th>
+                                <th style="text-align: center;">在庫数</th>
+                                <th style="text-align: right;">操作</th>
                             </tr>
                         </thead>
                         <tbody id="inventory-body">
-                            <!-- Firebaseからリアルタイム取得されます -->
+                            <!-- JSで生成 -->
                         </tbody>
                     </table>
                 </div>
@@ -192,7 +316,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2026 株式会社ミセミーヤ. All Rights Reserved.</p>
+            <p>&copy; 2026 Misemiya Inc. All Rights Reserved.</p>
         </div>
     </footer>
 
@@ -201,7 +325,6 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, onSnapshot, doc, updateDoc, deleteDoc, addDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-        // Firebase設定
         const firebaseConfig = {
             apiKey: "AIzaSyCs4bH_FnbT56iDNpycyXohQPZmgca1an4",
             authDomain: "misemiya-stock.firebaseapp.com",
@@ -216,49 +339,73 @@
         const db = getFirestore(app);
         const stockCollection = collection(db, "inventory");
 
+        // UIエレメント
         const placeholder = document.getElementById('inventory-placeholder');
         const mainSection = document.getElementById('inventory-main');
         const btnUnlock = document.getElementById('btn-unlock');
         const btnLock = document.getElementById('btn-lock');
 
-        // パスワード解除
+        // スマホメニューの制御
+        const hamburger = document.getElementById('hamburger-btn');
+        const navMenu = document.getElementById('nav-menu');
+        
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        window.closeMenu = () => {
+            navMenu.classList.remove('active');
+        };
+
+        // パスワードロック解除
         btnUnlock.addEventListener('click', () => {
-            const pass = prompt("パスワードを入力してください");
+            const pass = prompt("管理者パスワードを入力してください");
             if (pass === "0120") {
                 placeholder.style.display = 'none';
                 mainSection.style.display = 'block';
                 startRealtimeSync();
+                // 在庫管理までスクロール
+                mainSection.scrollIntoView({ behavior: 'smooth' });
             } else {
-                alert("パスワードが正しくありません。");
+                alert("パスワードが正しくありません");
             }
         });
 
         btnLock.addEventListener('click', () => {
-            if(confirm("管理画面を閉じます。変更内容は保存されています。")) {
+            if(confirm("管理画面を閉じますか？")) {
                 location.reload();
             }
         });
 
-        // リアルタイム同期
+        // リアルタイム同期 & 表示生成
         function startRealtimeSync() {
             const q = query(stockCollection, orderBy("name"));
             onSnapshot(q, (snapshot) => {
                 const tbody = document.getElementById('inventory-body');
                 tbody.innerHTML = '';
                 
+                if (snapshot.empty) {
+                    tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; padding: 20px;">データがありません</td></tr>';
+                    return;
+                }
+
                 snapshot.docs.forEach(docSnap => {
                     const item = docSnap.data();
                     const id = docSnap.id;
                     const tr = document.createElement('tr');
+                    
+                    // カード表示とテーブル表示をCSSで切り替えるため、HTML構造をシンプルかつ柔軟に
                     tr.innerHTML = `
-                        <td style="padding: 15px;">${item.name}</td>
-                        <td style="text-align: center; padding: 15px;">
-                            <button class="qty-btn" onclick="updateQty('${id}', ${item.count - 1})">-</button>
-                            <span style="font-weight:bold; font-size: 1.2em; min-width: 30px; display: inline-block;">${item.count}</span>
-                            <button class="qty-btn" onclick="updateQty('${id}', ${item.count + 1})">+</button>
+                        <td>${item.name}</td>
+                        <td>
+                            <div class="qty-controls">
+                                <button class="btn-circle" onclick="updateQty('${id}', ${item.count - 1})">－</button>
+                                <span class="qty-val">${item.count}</span>
+                                <button class="btn-circle" onclick="updateQty('${id}', ${item.count + 1})">＋</button>
+                            </div>
                         </td>
-                        <td style="text-align: center; padding: 15px;">
-                            <button class="delete-btn" onclick="deleteItem('${id}', '${item.name}')">削除</button>
+                        <td>
+                            <button class="btn-delete" onclick="deleteItem('${id}', '${item.name}')">削除</button>
                         </td>
                     `;
                     tbody.appendChild(tr);
@@ -266,14 +413,15 @@
             });
         }
 
-        // 操作関数（windowオブジェクトに紐付け）
+        // Window関数（HTMLから呼び出し用）
         window.updateQty = async (id, newCount) => {
             if (newCount < 0) return;
+            // ボタン連打時のUI反映ラグを防ぐための楽観的UI更新は省略し、Firebase同期に任せる
             await updateDoc(doc(db, "inventory", id), { count: newCount });
         };
 
         window.deleteItem = async (id, name) => {
-            if (confirm(`${name} を削除しますか？`)) {
+            if (confirm(`「${name}」を本当に削除しますか？`)) {
                 await deleteDoc(doc(db, "inventory", id));
             }
         };
@@ -281,17 +429,25 @@
         document.getElementById('add-item-btn').addEventListener('click', async () => {
             const nameInput = document.getElementById('new-name');
             const countInput = document.getElementById('new-count');
-            if (!nameInput.value) return;
+            
+            if (!nameInput.value) {
+                alert("商品名を入力してください");
+                return;
+            }
 
-            await addDoc(stockCollection, {
-                name: nameInput.value,
-                count: parseInt(countInput.value) || 0
-            });
-            nameInput.value = '';
-            countInput.value = '';
+            try {
+                await addDoc(stockCollection, {
+                    name: nameInput.value,
+                    count: parseInt(countInput.value) || 0
+                });
+                nameInput.value = '';
+                countInput.value = '';
+            } catch (e) {
+                console.error("Error adding document: ", e);
+                alert("追加に失敗しました");
+            }
         });
 
-        // 初期データ一括投入
         window.importInitialData = async () => {
             const initialData = [
                 { name: "白味噌", count: 2 }, { name: "QTTA カルボナーラ味", count: 2 },
@@ -301,12 +457,10 @@
                 { name: "ホタテ塩", count: 2 }, { name: "シーフードヌードル", count: 1 },
                 { name: "カレーうどん", count: 2 }, { name: "担々麺", count: 1 }
             ];
-            if (confirm("画像を元にした初期データをFirebaseに投入しますか？")) {
+            if (confirm("初期データをインポートしますか？（重複して追加されます）")) {
                 for (const item of initialData) { await addDoc(stockCollection, item); }
-                alert("投入完了しました。一覧に表示されます。");
             }
         };
     </script>
 </body>
 </html>
-
