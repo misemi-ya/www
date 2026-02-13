@@ -511,41 +511,51 @@ input[type="number"], input[type="text"] {
             </div>
         </section>
 
-<!-- カップヌードル在庫管理セクション -->
-        <section id="inventory" class="content-section">
-            <div class="container">
-                <h3>カップヌードル在庫管理</h3>
-                <div id="auth-section" style="margin-bottom: 20px; text-align: right;">
-                    <button id="btn-login" class="btn-products" style="padding: 10px 20px; font-size: 0.9em; background-color: var(--primary-color);">管理者ログイン(編集用)</button>
-                    <button id="btn-logout" class="btn-products" style="padding: 10px 20px; font-size: 0.9em; background-color: #7f8c8d; display: none;">ログアウト</button>
-                </div>
+<!-- 在庫管理：アンロック前（ボタンだけ表示） -->
+<section id="inventory-placeholder" class="content-section" style="text-align: center; background-color: #f9f9f9;">
+    <div class="container">
+        <button id="btn-unlock" class="btn-products" style="background-color: var(--primary-color);">
+            カップヌードル在庫管理を表示 (要パスワード)
+        </button>
+    </div>
+</section>
 
-                <!-- 新規追加フォーム（ログイン時のみ表示） -->
-                <div id="admin-panel" style="display: none; background: #f9f9f9; padding: 20px; border-radius: 8px; margin-bottom: 30px; border: 1px solid #ddd;">
-                    <h4 style="margin-top:0;">新しく商品を追加</h4>
-                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <input type="text" id="new-name" placeholder="商品名" style="padding: 10px; flex: 2; min-width: 200px;">
-                        <input type="number" id="new-count" placeholder="個数" style="padding: 10px; flex: 1; min-width: 80px;">
-                        <button onclick="addItem()" class="btn-products" style="padding: 10px 20px; font-size: 0.9em;">追加</button>
-                    </div>
-                </div>
+<!-- 在庫管理：アンロック後（初期状態は display: none） -->
+<section id="inventory-main" class="content-section" style="display: none;">
+    <div class="container">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+            <h3 style="margin-bottom: 0; text-align: left;">カップヌードル在庫管理</h3>
+            <button id="btn-lock" style="background:none; border:none; color:#777; cursor:pointer; text-decoration:underline;">閉じる・ログアウト</button>
+        </div>
 
-                <div class="table-wrapper" style="overflow-x: auto;">
-                    <table id="stock-table" style="width: 100%; border-collapse: collapse; background: white; border: 1px solid #eee;">
-                        <thead>
-                            <tr style="background-color: var(--primary-color); color: white;">
-                                <th style="padding: 15px; text-align: left;">商品名</th>
-                                <th style="padding: 15px; text-align: center; width: 150px;">個数</th>
-                                <th class="admin-only" style="padding: 15px; text-align: center; width: 120px; display: none;">操作</th>
-                            </tr>
-                        </thead>
-                        <tbody id="inventory-body">
-                            <!-- JSで生成されます -->
-                        </tbody>
-                    </table>
-                </div>
+        <!-- 追加フォーム -->
+        <div id="admin-panel" style="background: #f4f4f4; padding: 20px; border-radius: 8px; margin-bottom: 30px; border: 1px solid #ddd;">
+            <h4 style="margin-top:0;">新しく商品を追加</h4>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <input type="text" id="new-name" placeholder="商品名" style="padding: 10px; flex: 2; min-width: 200px;">
+                <input type="number" id="new-count" placeholder="個数" style="padding: 10px; flex: 1; min-width: 80px;">
+                <button id="add-item-btn" class="btn-products" style="padding: 10px 20px; font-size: 0.9em;">追加</button>
             </div>
-        </section>
+            <!-- 初回のみ使用 -->
+            <button onclick="importInitialData()" style="margin-top:15px; font-size:0.6em; opacity:0.4; border:none; background:none; cursor:pointer;">[初期データ投入]</button>
+        </div>
+
+        <div class="table-wrapper" style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; background: white; border: 1px solid #eee;">
+                <thead>
+                    <tr style="background-color: var(--primary-color); color: white;">
+                        <th style="padding: 15px; text-align: left;">商品名</th>
+                        <th style="padding: 15px; text-align: center; width: 150px;">個数</th>
+                        <th style="padding: 15px; text-align: center; width: 120px;">操作</th>
+                    </tr>
+                </thead>
+                <tbody id="inventory-body">
+                    <!-- JSでデータが入ります -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
             
     </main>
 
@@ -556,110 +566,127 @@ input[type="number"], input[type="text"] {
     </footer>
 
 <script>
-    // 初期データ（画像に基づいたリスト）
-    const initialData = [
-        { name: "白味噌", count: 2 },
-        { name: "QTTA カルボナーラ味", count: 2 },
-        { name: "ガーリックスタミナ豚丼", count: 1 },
-        { name: "欧風チーズカレー", count: 1 },
-        { name: "あっさりシーフード", count: 2 },
-        { name: "ノーマルカップヌードル", count: 2 },
-        { name: "QTTA トマトクリーム味", count: 1 },
-        { name: "QTTA サワークリームオニオン味", count: 1 },
-        { name: "ホタテ塩", count: 2 },
-        { name: "シーフードヌードル", count: 1 },
-        { name: "カレーうどん", count: 2 },
-        { name: "担々麺", count: 1 }
-    ];
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getFirestore, collection, onSnapshot, doc, updateDoc, deleteDoc, addDoc, query } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-    let inventory = JSON.parse(localStorage.getItem('misemiya_inventory')) || initialData;
-    let isAdmin = false;
+    // 【重要】自分のFirebase設定に書き換えてください
+const firebaseConfig = {
 
-    const inventoryBody = document.getElementById('inventory-body');
-    const adminPanel = document.getElementById('admin-panel');
-    const btnLogin = document.getElementById('btn-login');
-    const btnLogout = document.getElementById('btn-logout');
+  apiKey: "AIzaSyCs4bH_FnbT56iDNpycyXohQPZmgca1an4",
 
-    // パスワードチェック
-    btnLogin.addEventListener('click', () => {
+  authDomain: "misemiya-stock.firebaseapp.com",
+
+  projectId: "misemiya-stock",
+
+  storageBucket: "misemiya-stock.firebasestorage.app",
+
+  messagingSenderId: "894404193625",
+
+  appId: "1:894404193625:web:461809a803f0f6ab597048",
+
+  measurementId: "G-D8MPDEZD2W"
+
+};
+
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const stockCollection = collection(db, "inventory");
+
+    const placeholder = document.getElementById('inventory-placeholder');
+    const mainSection = document.getElementById('inventory-main');
+    const btnUnlock = document.getElementById('btn-unlock');
+    const btnLock = document.getElementById('btn-lock');
+
+    // --- アンロック処理 ---
+    btnUnlock.addEventListener('click', () => {
         const pass = prompt("パスワードを入力してください");
         if (pass === "0120") {
-            isAdmin = true;
-            updateUI();
-            alert("ログインしました。編集が可能です。");
+            placeholder.style.display = 'none';
+            mainSection.style.display = 'block';
+            startRealtimeSync(); // 認証後にデータ取得を開始
         } else {
-            alert("パスワードが違います。");
+            alert("パスワードが正しくありません。");
         }
     });
 
-    btnLogout.addEventListener('click', () => {
-        isAdmin = false;
-        updateUI();
+    btnLock.addEventListener('click', () => {
+        if(confirm("ログアウトして管理画面を閉じますか？")) {
+            location.reload(); // 安全のためリロードして状態をリセット
+        }
     });
 
-    function updateUI() {
-        // 管理画面の表示切り替え
-        adminPanel.style.display = isAdmin ? 'block' : 'none';
-        btnLogin.style.display = isAdmin ? 'none' : 'inline-block';
-        btnLogout.style.display = isAdmin ? 'inline-block' : 'none';
-        
-        renderTable();
-    }
-
-    function renderTable() {
-        inventoryBody.innerHTML = '';
-        inventory.forEach((item, index) => {
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td>${item.name}</td>
-                <td style="text-align: center;">
-                    ${isAdmin ? `<button class="qty-btn" onclick="changeCount(${index}, -1)">-</button>` : ''}
-                    <span style="font-weight:bold; font-size: 1.2em; min-width: 30px; display: inline-block;">${item.count}</span>
-                    ${isAdmin ? `<button class="qty-btn" onclick="changeCount(${index}, 1)">+</button>` : ''}
-                </td>
-                ${isAdmin ? `<td style="text-align: center;"><button class="delete-btn" onclick="deleteItem(${index})">削除</button></td>` : ''}
-            `;
-            inventoryBody.appendChild(tr);
+    // --- データ読み込みと表示 ---
+    function startRealtimeSync() {
+        onSnapshot(query(stockCollection), (snapshot) => {
+            const tbody = document.getElementById('inventory-body');
+            tbody.innerHTML = '';
+            
+            snapshot.docs.forEach(docSnap => {
+                const item = docSnap.data();
+                const id = docSnap.id;
+                const tr = document.createElement('tr');
+                tr.style.borderBottom = "1px solid #eee";
+                tr.innerHTML = `
+                    <td style="padding: 15px;">${item.name}</td>
+                    <td style="text-align: center; padding: 15px;">
+                        <button class="qty-btn" onclick="updateQty('${id}', ${item.count - 1})">-</button>
+                        <span style="font-weight:bold; font-size: 1.2em; min-width: 30px; display: inline-block;">${item.count}</span>
+                        <button class="qty-btn" onclick="updateQty('${id}', ${item.count + 1})">+</button>
+                    </td>
+                    <td style="text-align: center; padding: 15px;">
+                        <button class="delete-btn" onclick="deleteItem('${id}', '${item.name}')">削除</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
         });
-
-        // テーブルヘッダーの「操作」列の表示切り替え
-        const adminHead = document.querySelector('.admin-only');
-        if(adminHead) adminHead.style.display = isAdmin ? 'table-cell' : 'none';
-
-        localStorage.setItem('misemiya_inventory', JSON.stringify(inventory));
     }
 
-    function changeCount(index, delta) {
-        inventory[index].count = Math.max(0, inventory[index].count + delta);
-        renderTable();
-    }
+    // --- 各種操作関数をwindowに公開 ---
+    window.updateQty = async (id, newCount) => {
+        if (newCount < 0) return;
+        await updateDoc(doc(db, "inventory", id), { count: newCount });
+    };
 
-    function addItem() {
+    window.deleteItem = async (id, name) => {
+        if (confirm(`${name} を削除しますか？`)) {
+            await deleteDoc(doc(db, "inventory", id));
+        }
+    };
+
+    document.getElementById('add-item-btn').addEventListener('click', async () => {
         const nameInput = document.getElementById('new-name');
         const countInput = document.getElementById('new-count');
-        if (nameInput.value === "") return;
+        if (!nameInput.value) return;
 
-        inventory.push({
+        await addDoc(stockCollection, {
             name: nameInput.value,
             count: parseInt(countInput.value) || 0
         });
-
         nameInput.value = '';
         countInput.value = '';
-        renderTable();
-    }
+    });
 
-    function deleteItem(index) {
-        if (confirm(`${inventory[index].name}を削除してよろしいですか？`)) {
-            inventory.splice(index, 1);
-            renderTable();
+    // 初回データ投入用ヘルパー
+    window.importInitialData = async () => {
+        const initialData = [
+            { name: "白味噌", count: 2 }, { name: "QTTA カルボナーラ味", count: 2 },
+            { name: "ガーリックスタミナ豚丼", count: 1 }, { name: "欧風チーズカレー", count: 1 },
+            { name: "あっさりシーフード", count: 2 }, { name: "ノーマルカップヌードル", count: 2 },
+            { name: "QTTA トマトクリーム味", count: 1 }, { name: "QTTA サワークリームオニオン味", count: 1 },
+            { name: "ホタテ塩", count: 2 }, { name: "シーフードヌードル", count: 1 },
+            { name: "カレーうどん", count: 2 }, { name: "担々麺", count: 1 }
+        ];
+        if (confirm("初期データを投入しますか？")) {
+            for (const item of initialData) { await addDoc(stockCollection, item); }
+            alert("投入完了");
         }
-    }
-
-    // 初回読み込み
-    renderTable();
+    };
 </script>
     
 </body>
 </html>
+
 
