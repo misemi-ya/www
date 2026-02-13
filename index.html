@@ -5,10 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>株式会社ミセミーヤ - 公式ホームページ</title>
-    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* 基本スタイル */
+        /* --- 基本スタイル（既存） --- */
         :root {
             --primary-color: #2c3e50;
             --secondary-color: #3498db;
@@ -25,9 +24,8 @@
         h1, h2, h3 { font-family: var(--heading-font); color: var(--primary-color); margin-top: 0; font-weight: 600; }
         p { margin-bottom: 1.2em; font-size: 1.05em; }
         a { color: var(--secondary-color); text-decoration: none; transition: color 0.3s ease; }
-        a:hover { color: var(--accent-color); text-decoration: underline; }
 
-        /* ヘッダー */
+        /* --- ヘッダー（既存） --- */
         header {
             background-color: rgba(255, 255, 255, 0.8);
             -webkit-backdrop-filter: blur(10px);
@@ -46,29 +44,30 @@
         header nav ul li { margin-left: 30px; }
         header nav ul li a { font-size: 1.1em; color: var(--primary-color); font-weight: 400; }
 
-        /* セクション共通 */
+        /* --- セクション共通（既存） --- */
         .content-section { padding: 80px 0; border-bottom: 1px solid var(--light-gray); }
         .content-section h3 { font-size: 2.5em; margin-bottom: 40px; text-align: center; position: relative; padding-bottom: 15px; }
         .content-section h3::after { content: ''; position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); width: 70px; height: 3px; background-color: var(--secondary-color); }
 
-        /* ヒーロー */
+        /* --- ヒーロー（既存） --- */
         #hero { background: linear-gradient(to right, var(--secondary-color), #5dade2); color: var(--white-color); padding: 100px 0; text-align: center; }
         #hero h2 { font-size: 3em; color: var(--white-color); margin-bottom: 25px; }
+        #hero p { font-size: 1.3em; max-width: 750px; margin: 0 auto; }
 
-        /* ボタン */
-        .btn-products { display: inline-block; background-color: var(--accent-color); color: var(--white-color); padding: 18px 40px; font-size: 1.2em; font-weight: 700; border-radius: 8px; text-decoration: none; border:none; cursor:pointer; }
-        .btn-products:hover { background-color: #d35400; transform: translateY(-3px); }
+        /* --- ボタン類（既存） --- */
+        .btn-products { display: inline-block; background-color: var(--accent-color); color: var(--white-color); padding: 18px 40px; font-size: 1.2em; font-weight: 700; border-radius: 8px; text-decoration: none; border:none; cursor:pointer; transition: all 0.3s ease; }
+        .btn-products:hover { background-color: #d35400; transform: translateY(-3px); box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
 
-        /* 大学セクション */
+        /* --- 大学セクション（既存デザイン） --- */
         #university { text-align: center; }
-        .university-icon { color: var(--accent-color); margin-left: 10px; }
+        .university-icon { color: var(--accent-color); margin-left: 10px; font-size: 0.8em; }
+        .university-intro { font-size: 1.15em; max-width: 800px; margin: 0 auto 50px auto; }
 
-        /* 在庫管理スタイル */
+        /* --- 在庫管理用（追加分） --- */
         .table-wrapper { overflow-x: auto; margin-top: 20px; }
         #inventory-body tr:nth-child(even) { background-color: #fcfcfc; }
         #inventory-body tr { border-bottom: 1px solid #eee; }
         .qty-btn { background: #eee; border: 1px solid #ccc; padding: 5px 12px; cursor: pointer; border-radius: 4px; margin: 0 5px; font-weight: bold; }
-        .qty-btn:hover { background: #ddd; }
         .delete-btn { background: #e74c3c; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; }
         input[type="number"], input[type="text"] { padding: 10px; border: 1px solid #ccc; border-radius: 4px; }
 
@@ -76,8 +75,8 @@
 
         @media (max-width: 768px) {
             header .container { flex-direction: column; }
-            header nav ul { margin-top: 15px; }
-            header nav ul li { margin: 5px 15px; }
+            header nav ul { margin-top: 15px; flex-direction: column; align-items: center; }
+            header nav ul li { margin: 5px 0; }
             .content-section h3 { font-size: 2em; }
         }
     </style>
@@ -100,6 +99,7 @@
     </header>
 
     <main>
+        <!-- ヒーローセクション -->
         <section id="hero">
             <div class="container">
                 <h2>日常に、便利を。</h2>
@@ -107,37 +107,44 @@
             </div>
         </section>
 
+        <!-- 私たちのことセクション -->
         <section id="about" class="content-section">
             <div class="container">
                 <h3>私たちのこと</h3>
-                <div class="about-content">
-                    <p>株式会社ミセミーヤは、2020年に設立されました。お客様の生活を豊かにするユニークな製品を提供することを使命としています。</p>
-                    <p>主な事業として、ECサイト「ミセミーヤ」を展開しており、高い評価をいただいております。</p>
+                <div class="about-content" style="max-width: 800px; margin: 0 auto;">
+                    <p>株式会社ミセミーヤは、2020年に設立され、お客様の生活を豊かにするユニークな製品を提供することを使命としています。私たちは常に品質とデザインにこだわり、使う人に喜びをもたらす商品開発を目指しています。</p>
+                    <p>主な事業として、ECサイト、ミセミーヤを展開しており、特に全世界の全商品の販売において高い評価をいただいております。今後も、持続可能な社会の実現に貢献しつつ、革新的な価値を提供し続けてまいります。</p>
                 </div>
             </div>
         </section>
 
+        <!-- 商品のご案内セクション -->
         <section id="products" class="content-section">
             <div class="container" style="text-align: center;">
                 <h3>商品のご案内</h3>
-                <p>ミセミーヤが自信を持っておすすめする商品ラインナップをご覧ください。</p>
+                <p>ミセミーヤが自信を持っておすすめする、こだわりの商品ラインナップをご覧ください。最新の商品情報やお得なキャンペーンもこちらからご確認いただけます。</p>
                 <div class="button-wrapper">
-                    <a href="https://shop.misemi-ya.net" class="btn-products" target="_blank">商品一覧サイトへ進む</a>
+                    <a href="https://shop.misemi-ya.net" class="btn-products" target="_blank" rel="noopener noreferrer">商品一覧サイトへ進む</a>
                 </div>
             </div>
         </section>
 
+        <!-- 店魅偉屋大学セクション -->
         <section id="university" class="content-section">
             <div class="container">
                 <h3>店魅偉屋大学 <span class="university-icon">🎓</span></h3>
-                <p>「店魅偉屋大学」は、あなたのビジネススキルと創造性を引き出すための実践的な学びの場です。</p>
+                <p class="university-intro">
+                    「店魅偉屋大学」は、あなたのビジネススキルと創造性を最大限に引き出すための実践的な学びの場です。
+                    最新のマーケティング戦略から、お客様を魅了する商品開発、そして効果的なECサイト運営まで、
+                    明日から使える知識と技術を提供します。私たちと共に、あなたの「お店」を「魅力的」な「偉業」へと導きましょう。
+                </p>
                 <div class="button-wrapper">
-                    <a href="https://u.misemi-ya.net" class="btn-products" style="background-color: var(--accent-color);">ホームページへ</a>
+                    <a href="https://u.misemi-ya.net" class="btn-products" target="_blank" rel="noopener noreferrer">店魅偉屋大学ホームページへ</a>
                 </div>
             </div>
         </section>
 
-        <!-- 在庫管理：表示ボタン -->
+        <!-- 在庫管理：アンロック前（初期状態） -->
         <section id="inventory-placeholder" class="content-section" style="text-align: center; background-color: #f9f9f9;">
             <div class="container">
                 <button id="btn-unlock" class="btn-products" style="background-color: var(--primary-color);">
@@ -146,14 +153,15 @@
             </div>
         </section>
 
-        <!-- 在庫管理：本体 -->
+        <!-- 在庫管理：本体（パスワード後に出現） -->
         <section id="inventory-main" class="content-section" style="display: none;">
             <div class="container">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap; gap: 20px;">
                     <h3 style="margin-bottom: 0; text-align: left;">カップヌードル在庫管理</h3>
-                    <button id="btn-lock" style="background:none; border:none; color:#777; cursor:pointer; text-decoration:underline;">閉じる・ログアウト</button>
+                    <button id="btn-lock" style="background:none; border:none; color:#777; cursor:pointer; text-decoration:underline;">管理画面を閉じる</button>
                 </div>
 
+                <!-- 新規追加フォーム -->
                 <div id="admin-panel" style="background: #f4f4f4; padding: 20px; border-radius: 8px; margin-bottom: 30px; border: 1px solid #ddd;">
                     <h4 style="margin-top:0;">新しく商品を追加</h4>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
@@ -161,7 +169,7 @@
                         <input type="number" id="new-count" placeholder="個数" style="flex: 1; min-width: 80px;">
                         <button id="add-item-btn" class="btn-products" style="padding: 10px 20px; font-size: 0.9em;">追加</button>
                     </div>
-                    <button onclick="importInitialData()" style="margin-top:15px; font-size:0.6em; opacity:0.4; border:none; background:none; cursor:pointer;">[初期データ投入]</button>
+                    <button onclick="importInitialData()" style="margin-top:15px; font-size:0.6em; opacity:0.4; border:none; background:none; cursor:pointer;">[初期データ投入ボタン]</button>
                 </div>
 
                 <div class="table-wrapper">
@@ -174,7 +182,7 @@
                             </tr>
                         </thead>
                         <tbody id="inventory-body">
-                            <!-- リアルタイムデータが入ります -->
+                            <!-- Firebaseからリアルタイム取得されます -->
                         </tbody>
                     </table>
                 </div>
@@ -188,11 +196,12 @@
         </div>
     </footer>
 
-    <!-- Firebase Scripts -->
+    <!-- Firebase JS設定 -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, onSnapshot, doc, updateDoc, deleteDoc, addDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
+        // Firebase設定
         const firebaseConfig = {
             apiKey: "AIzaSyCs4bH_FnbT56iDNpycyXohQPZmgca1an4",
             authDomain: "misemiya-stock.firebaseapp.com",
@@ -212,6 +221,7 @@
         const btnUnlock = document.getElementById('btn-unlock');
         const btnLock = document.getElementById('btn-lock');
 
+        // パスワード解除
         btnUnlock.addEventListener('click', () => {
             const pass = prompt("パスワードを入力してください");
             if (pass === "0120") {
@@ -224,13 +234,13 @@
         });
 
         btnLock.addEventListener('click', () => {
-            if(confirm("管理画面を閉じますか？")) {
+            if(confirm("管理画面を閉じます。変更内容は保存されています。")) {
                 location.reload();
             }
         });
 
+        // リアルタイム同期
         function startRealtimeSync() {
-            // 名前順に並び替えて取得
             const q = query(stockCollection, orderBy("name"));
             onSnapshot(q, (snapshot) => {
                 const tbody = document.getElementById('inventory-body');
@@ -256,6 +266,7 @@
             });
         }
 
+        // 操作関数（windowオブジェクトに紐付け）
         window.updateQty = async (id, newCount) => {
             if (newCount < 0) return;
             await updateDoc(doc(db, "inventory", id), { count: newCount });
@@ -280,6 +291,7 @@
             countInput.value = '';
         });
 
+        // 初期データ一括投入
         window.importInitialData = async () => {
             const initialData = [
                 { name: "白味噌", count: 2 }, { name: "QTTA カルボナーラ味", count: 2 },
@@ -289,9 +301,9 @@
                 { name: "ホタテ塩", count: 2 }, { name: "シーフードヌードル", count: 1 },
                 { name: "カレーうどん", count: 2 }, { name: "担々麺", count: 1 }
             ];
-            if (confirm("初期データを投入しますか？")) {
+            if (confirm("画像を元にした初期データをFirebaseに投入しますか？")) {
                 for (const item of initialData) { await addDoc(stockCollection, item); }
-                alert("投入完了");
+                alert("投入完了しました。一覧に表示されます。");
             }
         };
     </script>
